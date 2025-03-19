@@ -29,8 +29,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private TrailRenderer tr;
     [SerializeField] Transform camTransform;
 
+    [SerializeField] ParticleSystem speedLines;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,7 +41,6 @@ public class Movement : MonoBehaviour
         tr.emitting = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         myInput();
@@ -61,6 +60,19 @@ public class Movement : MonoBehaviour
         }
 
         movement = Quaternion.AngleAxis(camTransform.rotation.eulerAngles.y, Vector3.up) * movement;
+    }
+
+    private void LateUpdate()
+    {
+        //checks if the speed is over 12, if not don't play effect
+        if (rb.linearVelocity.magnitude >= 12)
+        {
+            speedLines.Play();
+        }
+        else if (rb.linearVelocity.magnitude <= 11)
+        {
+            speedLines.Stop();
+        }
     }
 
     private void FixedUpdate()
@@ -116,6 +128,8 @@ public class Movement : MonoBehaviour
     }
 
 
+
+
     void GroundedCheck() 
     {
         RaycastHit hit;
@@ -136,12 +150,10 @@ public class Movement : MonoBehaviour
     {
         dashing = false;
         tr.emitting = true;
-
         Vector3 dashDir;
         dashDir = Camera.main.transform.forward;
         dashDir.y = 0;
         dashDir.Normalize();
-
         rb.linearVelocity = dashDir * speed;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
