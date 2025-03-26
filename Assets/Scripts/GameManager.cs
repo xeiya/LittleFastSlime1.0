@@ -10,6 +10,13 @@ public class GameManager : MonoBehaviour
 
     public Text timerText;
 
+    public bool isPaused;
+    
+    public GameObject pauseMenu;
+    public GameObject playerUI;
+
+    [SerializeField]
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,5 +37,16 @@ public class GameManager : MonoBehaviour
     {
         timer += Time.deltaTime;
         timerText.text = (Mathf.Round(timer*100) / 100).ToString();
+    }
+
+    public void TogglePause() 
+    {
+        playerUI.SetActive(!playerUI.activeInHierarchy);
+        pauseMenu.SetActive(!pauseMenu.activeInHierarchy);
+
+        Time.timeScale = isPaused ? 1 : 0;
+        isPaused = !isPaused;
+
+        Cursor.lockState = pauseMenu.activeInHierarchy ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }

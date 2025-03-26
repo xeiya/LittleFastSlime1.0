@@ -1,5 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(TrailRenderer))]
@@ -11,7 +14,7 @@ public class Movement : MonoBehaviour
     Vector3 movement;
 
     private Vector3 start;
-
+    [Header("Player Properties")]
     [SerializeField] private float speed;
     [SerializeField] private float topSpeed;
     
@@ -26,16 +29,28 @@ public class Movement : MonoBehaviour
     private float dashingTime = 0.3f;
     private float dashingCooldown = 2f;
 
+    [Header("Visual Properties")]
     [SerializeField] private TrailRenderer tr;
+    [SerializeField] ParticleSystem speedLines;
+    [SerializeField] private Volume volume;
+
+    [SerializeField] private AnimationCurve lensDistortionAnimationCurve;
+
+    private float lensIntensityLastTime;
+
+    private LensDistortion lensDistortion;
+
+    [Header("Camera Properties")]
     [SerializeField] Transform camTransform;
 
-    [SerializeField] ParticleSystem speedLines;
-
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         sphereCollider = GetComponent<SphereCollider>();
-        
+        volume.profile.TryGet(out lensDistortion);
+    }
+    void Start()
+    {
         Vector3 start = rb.transform.position;
 
         tr.emitting = false;
@@ -45,10 +60,21 @@ public class Movement : MonoBehaviour
     {
         myInput();
 
+        //When pressing shift, it calls the dash couritine
         if (Input.GetKeyDown(KeyCode.LeftShift) && dashing)
         {
             StartCoroutine(Dash());
+
+            speedLines.Play();
+
+            //Takes the lens intensity from last time
+            lensIntensityLastTime = Time.realtimeSinceStartup;
         }
+
+        //Creates a float and evaluates the lens intensity last time since startup
+        float lensIntensity = lensDistortionAnimationCurve.Evaluate(Time.realtimeSinceStartup - lensIntensityLastTime);
+        //takes the lensDistotion intensity value and applies it to the lensIntensity float
+        lensDistortion.intensity.value = lensIntensity;
 
         if (Input.GetKeyDown(KeyCode.Space) && readyToJump && grounded)
         {
@@ -59,20 +85,12 @@ public class Movement : MonoBehaviour
             Invoke(nameof(resetJump), jumpCooldown);
         }
 
-        movement = Quaternion.AngleAxis(camTransform.rotation.eulerAngles.y, Vector3.up) * movement;
-    }
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            GameManager.gm.TogglePause();
+        }
 
-    private void LateUpdate()
-    {
-        //checks if the speed is over 12, if not don't play effect
-        if (rb.linearVelocity.magnitude >= 12)
-        {
-            speedLines.Play();
-        }
-        else if (rb.linearVelocity.magnitude <= 11)
-        {
-            speedLines.Stop();
-        }
+        movement = Quaternion.AngleAxis(camTransform.rotation.eulerAngles.y, Vector3.up) * movement;
     }
 
     private void FixedUpdate()
@@ -115,6 +133,7 @@ public class Movement : MonoBehaviour
 
     private void playerReset() 
     {
+        //If the player is below -2 on the Y axis, reset the player to the starting position
         if (rb.transform.position.y < -2)
         {
             rb.transform.position = start;
@@ -127,11 +146,10 @@ public class Movement : MonoBehaviour
         movement.z = Input.GetAxisRaw("Vertical");
     }
 
-
-
-
     void GroundedCheck() 
     {
+        //Checks the distance between the ground and the player
+        //If it detects the ground grounded is true, else, false
         RaycastHit hit;
         float distance = 1f;
         Vector3 dir = new Vector3(0, -1);
@@ -150,6 +168,8 @@ public class Movement : MonoBehaviour
     {
         dashing = false;
         tr.emitting = true;
+
+        //Takes the direction of where we are facing and dash in that direction
         Vector3 dashDir;
         dashDir = Camera.main.transform.forward;
         dashDir.y = 0;
