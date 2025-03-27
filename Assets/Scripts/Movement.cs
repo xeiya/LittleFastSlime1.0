@@ -17,15 +17,16 @@ public class Movement : MonoBehaviour
     [Header("Player Properties")]
     [SerializeField] private float speed;
     [SerializeField] private float topSpeed;
-    
+
+    [Space(10)]
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpCooldown;
     bool readyToJump = true;
 
     bool grounded = false;
-
+    
     private bool dashing = true;
-    [SerializeField]private float dashingPower = 30f;
+    [SerializeField]private float dashingPower = 20f;
     private float dashingTime = 0.3f;
     private float dashingCooldown = 2f;
 
@@ -34,6 +35,8 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem speedLines;
     [SerializeField] private Volume volume;
 
+    [Space(10)]
+    //Creates an animation curve for the lens distortion
     [SerializeField] private AnimationCurve lensDistortionAnimationCurve;
 
     private float lensIntensityLastTime;
@@ -47,6 +50,8 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         sphereCollider = GetComponent<SphereCollider>();
+
+        //Gets the lensDistorion from the volume
         volume.profile.TryGet(out lensDistortion);
     }
     void Start()
@@ -174,7 +179,8 @@ public class Movement : MonoBehaviour
         dashDir = Camera.main.transform.forward;
         dashDir.y = 0;
         dashDir.Normalize();
-        rb.linearVelocity = dashDir * speed;
+        //Takes the DashDirection then multiplies that by the power and current speed
+        rb.linearVelocity = dashDir * dashingPower * speed;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
         yield return new WaitForSeconds(dashingCooldown);
