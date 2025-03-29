@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723dd0639fc9911418b349ab0cd0c269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0
+  elapsedTime: 0
   timerText: {fileID: 2141227003}
   isPaused: 0
   pauseMenu: {fileID: 1762648111}
@@ -6947,8 +6947,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.002532959, y: -0.0010070801}
-  m_SizeDelta: {x: 765, y: 151.52}
+  m_AnchoredPosition: {x: -0.000030517578, y: -0.0010070801}
+  m_SizeDelta: {x: 677.4, y: 151.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2141227003
 MonoBehaviour:
@@ -6983,7 +6983,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100000
+  m_Text: 00:00:00
 --- !u!222 &2141227004
 CanvasRenderer:
   m_ObjectHideFlags: 0

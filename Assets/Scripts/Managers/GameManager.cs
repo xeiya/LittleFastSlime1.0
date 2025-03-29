@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public float timer;
+    public float elapsedTime;
 
     public static GameManager gm;
 
@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
     
     public GameObject pauseMenu;
     public GameObject playerUI;
-
-    [SerializeField]
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,14 +27,18 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        timer = 0;
+        elapsedTime = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        timerText.text = (Mathf.Round(timer*100) / 100).ToString();
+        //Takes the elapsed time and divides it into minutes, seconds and milliseconds
+        elapsedTime += Time.deltaTime;
+        int minutes = Mathf.FloorToInt(elapsedTime / 60);
+        int seconds = Mathf.FloorToInt(elapsedTime % 60);
+        int milliseconds = Mathf.FloorToInt(elapsedTime * 1000 % 1000);
+        timerText.text = string.Format("{0:00}:{01:00}:{2:000}" , minutes, seconds, milliseconds);
     }
 
     public void TogglePause() 

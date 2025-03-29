@@ -138,8 +138,8 @@ public class Movement : MonoBehaviour
 
     private void playerReset() 
     {
-        //If the player is below -2 on the Y axis, reset the player to the starting position
-        if (rb.transform.position.y < -2)
+        //If the player is below -100 on the Y axis, reset the player to the starting position
+        if (rb.transform.position.y < -100)
         {
             rb.transform.position = start;
         }
