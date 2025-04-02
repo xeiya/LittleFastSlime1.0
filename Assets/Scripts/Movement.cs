@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(TrailRenderer))]
@@ -122,6 +123,19 @@ public class Movement : MonoBehaviour
         playerReset();
     }
 
+    private void LateUpdate()
+    {
+        //checks if the speed is over 12, if not don't play effect
+        if (rb.linearVelocity.magnitude >= 12)
+        {
+            speedLines.Play();
+        }
+        else if (rb.linearVelocity.magnitude <= 11)
+        {
+            speedLines.Stop();
+        }
+    }
+
     private void Jump() 
     { 
         Vector3 jumpMovement = rb.linearVelocity;
@@ -139,9 +153,10 @@ public class Movement : MonoBehaviour
     private void playerReset() 
     {
         //If the player is below -100 on the Y axis, reset the player to the starting position
-        if (rb.transform.position.y < -100)
+        if (rb.transform.position.y < -50)
         {
-            rb.transform.position = start;
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
         }
     }
 

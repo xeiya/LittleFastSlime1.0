@@ -700,7 +700,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 204627764}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 204627766}
+        m_TargetAssemblyTypeName: LevelSelect, Assembly-CSharp
+        m_MethodName: levelSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &204627763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3820,6 +3832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 850517626}
   - component: {fileID: 850517627}
+  - component: {fileID: 850517628}
   m_Layer: 0
   m_Name: MenuContoller
   m_TagString: Untagged
@@ -3866,6 +3879,19 @@ MonoBehaviour:
   fullScreenToggle: {fileID: 1515558936}
   confirmationPrompt: {fileID: 1405800312}
   resolutionDropdown: {fileID: 252309079}
+--- !u!114 &850517628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850517625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f191f9d742f24404aa33e36b2b5eb80d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: 
 --- !u!1 &864840518
 GameObject:
   m_ObjectHideFlags: 0

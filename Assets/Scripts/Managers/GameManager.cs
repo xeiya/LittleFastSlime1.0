@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
         }
 
         elapsedTime = 0;
+
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
