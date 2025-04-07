@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(TrailRenderer))]
 
-public class Movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
     private SphereCollider sphereCollider;
@@ -190,12 +190,13 @@ public class Movement : MonoBehaviour
         tr.emitting = true;
 
         //Takes the direction of where we are facing and dash in that direction
-        Vector3 dashDir;
-        dashDir = Camera.main.transform.forward;
-        dashDir.y = 0;
-        dashDir.Normalize();
+        //Vector3 dashDir;
+       // dashDir = Camera.main.transform.forward;
+       // dashDir.y = 0;
+       // dashDir.Normalize();
         //Takes the DashDirection then multiplies that by the power and current speed
-        rb.linearVelocity = dashDir * dashingPower * speed;
+        rb.linearVelocity += rb.linearVelocity.normalized * dashingPower * speed;
+        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, topSpeed);
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
         yield return new WaitForSeconds(dashingCooldown);
