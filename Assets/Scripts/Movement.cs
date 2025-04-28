@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         rb.AddForce(movement * speed);
-        rb.AddForce(VertSpeed(rb.linearVelocity,movement));
+        //rb.AddForce(VertSpeed(rb.linearVelocity,movement));
 
         float y = rb.linearVelocity.y;
 
