@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 start;
     [Header("Player Properties")]
     [SerializeField] private float speed;
+    [SerializeField] private float vertSpeed;
     [SerializeField] private float topSpeed;
 
     [Space(10)]
@@ -103,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         rb.AddForce(movement * speed);
+        rb.AddForce(VertSpeed(rb.linearVelocity,movement));
 
         float y = rb.linearVelocity.y;
 
@@ -134,6 +136,27 @@ public class PlayerMovement : MonoBehaviour
         {
             speedLines.Stop();
         }
+    }
+
+    private Vector3 VertSpeed(Vector3 velo, Vector3 inputWorld)
+    {
+        //velo.Normalize();
+        inputWorld.Normalize();
+        // Works out how much the input is matching the velocity direction
+        float vertFactor = 1 - Mathf.Abs(Vector3.Dot(inputWorld, velo.normalized));
+
+       // Debug.Log(vertFactor);
+
+        // Works out the left of the character
+        //Vector3 veloLeft = Vector3.Cross(velo.normalized, Vector3.up).normalized;
+       // Debug.DrawRay(transform.position, veloLeft * 5, Color.red);
+
+
+        // Has more of an effect with more speed
+        float speedFactor = Mathf.InverseLerp(0, topSpeed/ 4, velo.magnitude);
+
+        //Input effects left and right
+        return vertSpeed * camTransform.right * vertFactor * speedFactor;
     }
 
     private void Jump() 
