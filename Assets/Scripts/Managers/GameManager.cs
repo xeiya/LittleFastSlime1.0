@@ -60,6 +60,11 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = pauseMenu.activeInHierarchy ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
+    public void ToMenu() 
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void Retry() 
     {
         Scene currentScene = SceneManager.GetActiveScene();

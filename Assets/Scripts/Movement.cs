@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        movement.x *= 1 + (rb.linearVelocity.magnitude/25);
         rb.AddForce(movement * speed);
         //rb.AddForce(VertSpeed(rb.linearVelocity,movement));
 
@@ -145,11 +145,12 @@ public class PlayerMovement : MonoBehaviour
         // Works out how much the input is matching the velocity direction
         float vertFactor = 1 - Mathf.Abs(Vector3.Dot(inputWorld, velo.normalized));
 
-       // Debug.Log(vertFactor);
+        // Debug.Log(vertFactor);
 
         // Works out the left of the character
         //Vector3 veloLeft = Vector3.Cross(velo.normalized, Vector3.up).normalized;
-       // Debug.DrawRay(transform.position, veloLeft * 5, Color.red);
+        // Debug.DrawRay(transform.position, veloLeft * 5, Color.red);
+        
 
 
         // Has more of an effect with more speed
