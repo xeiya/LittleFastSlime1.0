@@ -23,8 +23,10 @@ public class TimeSave : MonoBehaviour
         elapsedTime = 0;
     }
 
+    //Checks the for the object that has been coillided with it. if it has been collided with then run this code
     private void OnTriggerEnter(Collider other)
     {
+        //Displays the Finish UI if the player makes contact witht his object
         if (other.CompareTag("Player"))
         {
             Cursor.lockState = CursorLockMode.None;
@@ -44,7 +46,7 @@ public class TimeSave : MonoBehaviour
         }
     }
 
-    //Updates the best time found in the PlayerPrefs
+    //Updates the best time found in the PlayerPrefs based on the current scene
     private void UpdateBestTimeText() 
     {
          bestTimeText.text = TimeString(PlayerPrefs.GetFloat("BestTime" + SceneManager.loadedSceneCount, 0));
@@ -56,6 +58,7 @@ public class TimeSave : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    //Formats the time into minutes, seconds and milliseconds
     string TimeString(float time)
     {
         int minutes = Mathf.FloorToInt(time / 60);

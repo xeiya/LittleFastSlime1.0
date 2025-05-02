@@ -327,8 +327,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2779754, y: 50.32487, z: 1.1563864}
-  m_Center: {x: -0.0045097554, y: 24.662449, z: -0.021660801}
+  m_Size: {x: 1.2779754, y: 80.42502, z: 1.1563863}
+  m_Center: {x: -0.0045097554, y: 39.712517, z: -0.021660801}
 --- !u!114 &7617635444889804022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,10 +341,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbc8dfd11408113408795bbb25788d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 8439220439826779011, guid: ab518ce92728b2346acbca6a9076f284, type: 3}
   speedUp: 20
   maxSpeed: 60
-  volume: {fileID: 0}
+  volume: {fileID: 5062459747377793134, guid: 36fc8db2386f6b64f9f95aa8c4e79e3d, type: 3}
   lensDistortionAnimationCurve:
     serializedVersion: 2
     m_Curve:

@@ -6,6 +6,6 @@ public class SlowDownPad : MonoBehaviour
     [SerializeField] private float slowSpeed;
     private void OnTriggerEnter(Collider other)
     {
-        player.linearVelocity -= player.linearVelocity.normalized * slowSpeed;
+        player.linearVelocity = player.linearVelocity.normalized * slowSpeed;
     }
 }
