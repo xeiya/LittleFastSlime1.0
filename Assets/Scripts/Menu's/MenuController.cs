@@ -6,6 +6,9 @@ using UnityEngine.Rendering;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
+using ScreenFx;
+using UnityEngine.Audio;
 
 public class MenuController : MonoBehaviour
 {
@@ -13,9 +16,11 @@ public class MenuController : MonoBehaviour
     [SerializeField] GameObject mainMenu;
 
     [Header("Volume Setting")]
-    [SerializeField] private Text volumeTextValue = null;
+    [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
-    [SerializeField] private float defaultVolume = 50f;
+    [SerializeField] private float defaultVolume = 50;
+    [Space(10)]
+    [SerializeField] AudioMixer volumeMixer = null;
 
     [Header("Gameplay Settings")]
 
@@ -25,7 +30,7 @@ public class MenuController : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private Slider brightnessSlider = null;
-    [SerializeField] private Text brightnessTextValue = null;
+    [SerializeField] private TMP_Text brightnessTextValue = null;
     [SerializeField] private float defaultBrightness = 1;
 
     [Space(10)]
@@ -50,13 +55,12 @@ public class MenuController : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        //Gets the colorAdjustments profile
+        //Gets the colorAdjustments profile from the global volume
         volume.profile.TryGet(out colorAdjustments);
     }
 
     private void Start()
     {
-
         //This entire code, checks the resolution of the screen and gives options depending on what is found
         //DEPENDING on the screen size on start and places the resolution number into the [i] box for the dropdown
         resolutions = Screen.resolutions;
@@ -95,7 +99,7 @@ public class MenuController : MonoBehaviour
     }
 
     //Takes the value in the slider and shows it to the player in text
-    public void SetValue(float volume)
+    public void SetVolume(float volume)
     {
         AudioListener.volume = Mathf.RoundToInt(volume);
         volumeTextValue.text = volume.ToString("0");
@@ -106,6 +110,7 @@ public class MenuController : MonoBehaviour
     public void VolumeApply()
     {
         PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
+        volumeMixer.SetFloat("music", AudioListener.volume);
         StartCoroutine(ConfirmationBox());
     }
 

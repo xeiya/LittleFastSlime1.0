@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(resetJump), jumpCooldown);
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameManager.gm.TogglePause();
         }
@@ -104,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x *= 1 + (rb.linearVelocity.magnitude/25);
         rb.AddForce(movement * speed);
-        //rb.AddForce(VertSpeed(rb.linearVelocity,movement));
 
         float y = rb.linearVelocity.y;
 
@@ -136,28 +135,6 @@ public class PlayerMovement : MonoBehaviour
         {
             speedLines.Stop();
         }
-    }
-
-    private Vector3 VertSpeed(Vector3 velo, Vector3 inputWorld)
-    {
-        //velo.Normalize();
-        inputWorld.Normalize();
-        // Works out how much the input is matching the velocity direction
-        float vertFactor = 1 - Mathf.Abs(Vector3.Dot(inputWorld, velo.normalized));
-
-        // Debug.Log(vertFactor);
-
-        // Works out the left of the character
-        //Vector3 veloLeft = Vector3.Cross(velo.normalized, Vector3.up).normalized;
-        // Debug.DrawRay(transform.position, veloLeft * 5, Color.red);
-        
-
-
-        // Has more of an effect with more speed
-        float speedFactor = Mathf.InverseLerp(0, topSpeed/ 4, velo.magnitude);
-
-        //Input effects left and right
-        return vertSpeed * camTransform.right * vertFactor * speedFactor;
     }
 
     private void Jump() 
