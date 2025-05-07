@@ -18,7 +18,7 @@ public class MenuController : MonoBehaviour
     [Header("Volume Setting")]
     [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
-    [SerializeField] private float defaultVolume = 50;
+    [SerializeField] private float defaultVolume = 0.5f;
     [Space(10)]
     [SerializeField] AudioMixer volumeMixer = null;
 
@@ -101,17 +101,11 @@ public class MenuController : MonoBehaviour
     //Takes the value in the slider and shows it to the player in text
     public void SetVolume(float volume)
     {
-        AudioListener.volume = Mathf.RoundToInt(volume);
-        volumeTextValue.text = volume.ToString("0");
-    }
-
-    //Saves the players volume preferences in PlayerPrefs, 
-    //which we can refer to via the string "masterVolume"
-    public void VolumeApply()
-    {
-        PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
-        volumeMixer.SetFloat("music", AudioListener.volume);
-        StartCoroutine(ConfirmationBox());
+        //AudioListener.volume = Mathf.RoundToInt(volume);
+        //When making a mixer, keep it a float aswell as use Mathf.Log10 because
+        //Mixer's are non-linear
+        volumeMixer.SetFloat("Music", Mathf.Log10(volume)*20);
+        volumeTextValue.text = (volume*100).ToString("0");
     }
 
     //Controls and sets the brightness
@@ -190,7 +184,6 @@ public class MenuController : MonoBehaviour
             AudioListener.volume = defaultVolume;
             volumeSlider.value = defaultVolume;
             volumeTextValue.text = defaultVolume.ToString("0.0");
-            VolumeApply();
         }
     }
 }

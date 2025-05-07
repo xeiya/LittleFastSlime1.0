@@ -49,22 +49,28 @@ public class GameManager : MonoBehaviour
         timerText.text = string.Format("{0:00}'{01:00}''{2:000}" , minutes, seconds, milliseconds);
     }
 
+    //Toggle's the pause screen
     public void TogglePause() 
     {
+        //If the pausemenu is active, set it active, if not then don't
+        //Same with the player UI
         playerUI.SetActive(!playerUI.activeInHierarchy);
         pauseMenu.SetActive(!pauseMenu.activeInHierarchy);
 
+        //TimeScale is changed based on a Ternery opperator to toggle on and off the isPaused bool
         Time.timeScale = isPaused ? 1 : 0;
         isPaused = !isPaused;
 
         Cursor.lockState = pauseMenu.activeInHierarchy ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
+    //Loads the "MainMenu" scene
     public void ToMenu() 
     {
         SceneManager.LoadScene("MainMenu");
     }
 
+    //Gets the current scene and reloads it
     public void Retry() 
     {
         Scene currentScene = SceneManager.GetActiveScene();

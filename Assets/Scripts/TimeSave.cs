@@ -17,7 +17,8 @@ public class TimeSave : MonoBehaviour
 
     private void Start()
     {
-        bestTime = PlayerPrefs.GetFloat("BestTime" + SceneManager.loadedSceneCount, Mathf.Infinity);
+        //Gets the best time
+        bestTime = PlayerPrefs.GetFloat("BestTime" + SceneManager.GetActiveScene().buildIndex, Mathf.Infinity);
         UpdateBestTimeText();
 
         elapsedTime = 0;
@@ -34,10 +35,11 @@ public class TimeSave : MonoBehaviour
             FinishMenu();
             playerUI.SetActive(false);
 
-            if (GameManager.gm.elapsedTime < PlayerPrefs.GetFloat("BestTime" + SceneManager.loadedSceneCount, 0))
+            //Saves the time in playerPrefs based on the level, then displays it based on if the previous time is larger than the current
+            if (GameManager.gm.elapsedTime < PlayerPrefs.GetFloat("BestTime" + SceneManager.GetActiveScene().buildIndex, 3600f))
             {
                 //Creates a "best time" for the current level
-                PlayerPrefs.SetFloat("BestTime" + SceneManager.loadedSceneCount, GameManager.gm.elapsedTime);
+                PlayerPrefs.SetFloat("BestTime" + SceneManager.GetActiveScene().buildIndex, GameManager.gm.elapsedTime);
                 UpdateBestTimeText();
             }
 
@@ -49,7 +51,7 @@ public class TimeSave : MonoBehaviour
     //Updates the best time found in the PlayerPrefs based on the current scene
     private void UpdateBestTimeText() 
     {
-         bestTimeText.text = TimeString(PlayerPrefs.GetFloat("BestTime" + SceneManager.loadedSceneCount, 0));
+         bestTimeText.text = TimeString(PlayerPrefs.GetFloat("BestTime" + SceneManager.GetActiveScene().buildIndex, 3600));
     }
 
     public void FinishMenu()

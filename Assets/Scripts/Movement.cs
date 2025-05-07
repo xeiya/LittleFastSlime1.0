@@ -83,12 +83,16 @@ public class PlayerMovement : MonoBehaviour
         //takes the lensDistotion intensity value and applies it to the lensIntensity float
         lensDistortion.intensity.value = lensIntensity;
 
+        //If ready to jump and its gorunded, then you can jump
         if (Input.GetKeyDown(KeyCode.Space) && readyToJump && grounded)
         {
+            //Sets ready to jump to false
             readyToJump = false;
 
             Jump();
 
+
+            //Gets the reset jump, and resets the jump after a cooldown
             Invoke(nameof(resetJump), jumpCooldown);
         }
 
@@ -137,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Changes the y.velocity by the jumpforce
     private void Jump() 
     { 
         Vector3 jumpMovement = rb.linearVelocity;
@@ -154,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
     private void playerReset() 
     {
         //If the player is below -100 on the Y axis, reset the player to the starting position
-        if (rb.transform.position.y < -50)
+        if (rb.transform.position.y < -2)
         {
             Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.name);
@@ -197,6 +202,7 @@ public class PlayerMovement : MonoBehaviour
        // dashDir.Normalize();
         //Takes the DashDirection then multiplies that by the power and current speed
         rb.linearVelocity += rb.linearVelocity.normalized * dashingPower * speed;
+        //Limits our dash to correspond to our rop speed
         rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, topSpeed);
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;

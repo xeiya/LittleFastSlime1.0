@@ -20,8 +20,10 @@ public class SpeedUpPad : MonoBehaviour
         volume.profile.TryGet(out lensDistortion);
     }
 
+    //When it collide's with the hitbox, run tis code
     private void OnTriggerEnter(Collider other)
     {
+        //Get the player's velocity then speed it up by this amount
         player.linearVelocity += player.linearVelocity.normalized * speedUp;
         player.linearVelocity = Vector3.ClampMagnitude(player.linearVelocity, maxSpeed);
 

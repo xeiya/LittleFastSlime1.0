@@ -16327,6 +16327,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 6730603156372865167, guid: ae68d3bbc524c4c4a963dc90ee16b909, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7049509209787527910, guid: ae68d3bbc524c4c4a963dc90ee16b909, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
