@@ -106,6 +106,7 @@ public class MenuController : MonoBehaviour
         //Mixer's are non-linear
         volumeMixer.SetFloat("Music", Mathf.Log10(volume)*20);
         volumeTextValue.text = (volume*100).ToString("0");
+        PlayerPrefs.SetFloat("masterVolume", volume);
     }
 
     //Controls and sets the brightness
