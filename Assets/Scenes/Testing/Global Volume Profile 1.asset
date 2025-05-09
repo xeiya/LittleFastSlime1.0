@@ -1,0 +1,210 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: Global Volume Profile 1
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: 3401561762821709356}
+  - {fileID: 7796600383804225017}
+  - {fileID: 1556572354119478010}
+  - {fileID: 2065545600542858422}
+--- !u!114 &1556572354119478010
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
+  m_Name: LensDistortion
+  m_EditorClassIdentifier: 
+  active: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0
+  xMultiplier:
+    m_OverrideState: 1
+    m_Value: 1
+  yMultiplier:
+    m_OverrideState: 1
+    m_Value: 1
+  center:
+    m_OverrideState: 0
+    m_Value: {x: 0.5, y: 0.5}
+  scale:
+    m_OverrideState: 0
+    m_Value: 1
+--- !u!114 &2065545600542858422
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  postExposure:
+    m_OverrideState: 1
+    m_Value: 1
+  contrast:
+    m_OverrideState: 1
+    m_Value: 25
+  colorFilter:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  hueShift:
+    m_OverrideState: 1
+    m_Value: 0
+  saturation:
+    m_OverrideState: 1
+    m_Value: 15
+--- !u!114 &3401561762821709356
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2303f781f6c04e428d9eb352fa4be37e, type: 3}
+  m_Name: OutlineVol
+  m_EditorClassIdentifier: 
+  active: 1
+  m_Sensitive:
+    m_OverrideState: 1
+    m_Value: 0.05
+  m_Thickness:
+    m_OverrideState: 1
+    m_Value: 0.125
+  m_Color:
+    m_OverrideState: 1
+    m_Value:
+      _grad:
+        serializedVersion: 2
+        key0: {r: 0, g: 0, b: 0, a: 1}
+        key1: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
+        key2: {r: 0, g: 0, b: 0, a: 0}
+        key3: {r: 0, g: 0, b: 0, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 65535
+        ctime2: 0
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 65535
+        atime2: 0
+        atime3: 0
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_ColorSpace: 0
+        m_NumColorKeys: 2
+        m_NumAlphaKeys: 2
+      _pixels:
+      - {r: 0, g: 0, b: 0, a: 1}
+      - {r: 0.0069993907, g: 0.0069993907, b: 0.0069993907, a: 1}
+      - {r: 0.013998781, g: 0.013998781, b: 0.013998781, a: 1}
+      - {r: 0.020998172, g: 0.020998172, b: 0.020998172, a: 1}
+      - {r: 0.027997563, g: 0.027997563, b: 0.027997563, a: 1}
+      - {r: 0.034996953, g: 0.034996953, b: 0.034996953, a: 1}
+      - {r: 0.041996345, g: 0.041996345, b: 0.041996345, a: 1}
+      - {r: 0.048995733, g: 0.048995733, b: 0.048995733, a: 1}
+      - {r: 0.055995125, g: 0.055995125, b: 0.055995125, a: 1}
+      - {r: 0.06299452, g: 0.06299452, b: 0.06299452, a: 1}
+      - {r: 0.069993906, g: 0.069993906, b: 0.069993906, a: 1}
+      - {r: 0.076993294, g: 0.076993294, b: 0.076993294, a: 1}
+      - {r: 0.08399269, g: 0.08399269, b: 0.08399269, a: 1}
+      - {r: 0.09099208, g: 0.09099208, b: 0.09099208, a: 1}
+      - {r: 0.09799147, g: 0.09799147, b: 0.09799147, a: 1}
+      - {r: 0.104990855, g: 0.104990855, b: 0.104990855, a: 1}
+      - {r: 0.11199025, g: 0.11199025, b: 0.11199025, a: 1}
+      - {r: 0.11898965, g: 0.11898965, b: 0.11898965, a: 1}
+      - {r: 0.12598903, g: 0.12598903, b: 0.12598903, a: 1}
+      - {r: 0.13298842, g: 0.13298842, b: 0.13298842, a: 1}
+      - {r: 0.13998781, g: 0.13998781, b: 0.13998781, a: 1}
+      - {r: 0.14698721, g: 0.14698721, b: 0.14698721, a: 1}
+      - {r: 0.15398659, g: 0.15398659, b: 0.15398659, a: 1}
+      - {r: 0.16098599, g: 0.16098599, b: 0.16098599, a: 1}
+      - {r: 0.16798538, g: 0.16798538, b: 0.16798538, a: 1}
+      - {r: 0.17498477, g: 0.17498477, b: 0.17498477, a: 1}
+      - {r: 0.18198416, g: 0.18198416, b: 0.18198416, a: 1}
+      - {r: 0.18898354, g: 0.18898354, b: 0.18898354, a: 1}
+      - {r: 0.19598293, g: 0.19598293, b: 0.19598293, a: 1}
+      - {r: 0.20298234, g: 0.20298234, b: 0.20298234, a: 1}
+      - {r: 0.20998171, g: 0.20998171, b: 0.20998171, a: 1}
+      - {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
+  m_Fill:
+    m_OverrideState: 0
+    m_Value: {r: 0, g: 0, b: 0, a: 0}
+  m_Adaptive:
+    m_OverrideState: 1
+    m_Value: 0
+  m_Sharp:
+    m_OverrideState: 0
+    m_Value: 0
+  m_Remap:
+    m_OverrideState: 1
+    m_Value: 0
+  m_Mode:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &7796600383804225017
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772ef47f3fce34346bbb42fb4f5434b8, type: 3}
+  m_Name: PixelationVol
+  m_EditorClassIdentifier: 
+  active: 1
+  m_Scale:
+    m_OverrideState: 1
+    m_Value: 0.995
+  m_Grid:
+    m_OverrideState: 1
+    m_Value: 1
+  m_Roundness:
+    m_OverrideState: 1
+    m_Value: 0.5
+  m_Color:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+    hdr: 0
+  m_Palette:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+  m_Impact:
+    m_OverrideState: 1
+    m_Value: 1
+  m_Crisp:
+    m_OverrideState: 1
+    m_Value: 0
