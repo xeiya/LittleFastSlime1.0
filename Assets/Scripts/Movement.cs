@@ -3,11 +3,12 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(TrailRenderer))]
 
-public class Movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
     private SphereCollider sphereCollider;
@@ -16,16 +17,18 @@ public class Movement : MonoBehaviour
     private Vector3 start;
     [Header("Player Properties")]
     [SerializeField] private float speed;
+    [SerializeField] private float vertSpeed;
     [SerializeField] private float topSpeed;
-    
+
+    [Space(10)]
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpCooldown;
     bool readyToJump = true;
 
     bool grounded = false;
-
+    
     private bool dashing = true;
-    [SerializeField]private float dashingPower = 30f;
+    [SerializeField]private float dashingPower = 20f;
     private float dashingTime = 0.3f;
     private float dashingCooldown = 2f;
 
@@ -34,6 +37,8 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem speedLines;
     [SerializeField] private Volume volume;
 
+    [Space(10)]
+    //Creates an animation curve for the lens distortion
     [SerializeField] private AnimationCurve lensDistortionAnimationCurve;
 
     private float lensIntensityLastTime;
@@ -47,6 +52,8 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         sphereCollider = GetComponent<SphereCollider>();
+
+        //Gets the lensDistorion from the volume
         volume.profile.TryGet(out lensDistortion);
     }
     void Start()
@@ -76,16 +83,20 @@ public class Movement : MonoBehaviour
         //takes the lensDistotion intensity value and applies it to the lensIntensity float
         lensDistortion.intensity.value = lensIntensity;
 
+        //If ready to jump and its gorunded, then you can jump
         if (Input.GetKeyDown(KeyCode.Space) && readyToJump && grounded)
         {
+            //Sets ready to jump to false
             readyToJump = false;
 
             Jump();
 
+
+            //Gets the reset jump, and resets the jump after a cooldown
             Invoke(nameof(resetJump), jumpCooldown);
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameManager.gm.TogglePause();
         }
@@ -95,7 +106,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        movement.x *= 1 + (rb.linearVelocity.magnitude/25);
         rb.AddForce(movement * speed);
 
         float y = rb.linearVelocity.y;
@@ -117,6 +128,20 @@ public class Movement : MonoBehaviour
         playerReset();
     }
 
+    private void LateUpdate()
+    {
+        //checks if the speed is over 12, if not don't play effect
+        if (rb.linearVelocity.magnitude >= 12)
+        {
+            speedLines.Play();
+        }
+        else if (rb.linearVelocity.magnitude <= 11)
+        {
+            speedLines.Stop();
+        }
+    }
+
+    //Changes the y.velocity by the jumpforce
     private void Jump() 
     { 
         Vector3 jumpMovement = rb.linearVelocity;
@@ -133,10 +158,11 @@ public class Movement : MonoBehaviour
 
     private void playerReset() 
     {
-        //If the player is below -2 on the Y axis, reset the player to the starting position
+        //If the player is below -100 on the Y axis, reset the player to the starting position
         if (rb.transform.position.y < -2)
         {
-            rb.transform.position = start;
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
         }
     }
 
@@ -170,11 +196,14 @@ public class Movement : MonoBehaviour
         tr.emitting = true;
 
         //Takes the direction of where we are facing and dash in that direction
-        Vector3 dashDir;
-        dashDir = Camera.main.transform.forward;
-        dashDir.y = 0;
-        dashDir.Normalize();
-        rb.linearVelocity = dashDir * speed;
+        //Vector3 dashDir;
+       // dashDir = Camera.main.transform.forward;
+       // dashDir.y = 0;
+       // dashDir.Normalize();
+        //Takes the DashDirection then multiplies that by the power and current speed
+        rb.linearVelocity += rb.linearVelocity.normalized * dashingPower * speed;
+        //Limits our dash to correspond to our rop speed
+        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, topSpeed);
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
         yield return new WaitForSeconds(dashingCooldown);
