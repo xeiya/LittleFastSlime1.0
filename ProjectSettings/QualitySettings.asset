@@ -227,7 +227,7 @@ QualitySettings:
     QNX: 3
     ReservedCFE: 3
     Server: 3
-    Standalone: 3
+    Standalone: 1
     VisionOS: 3
     WebGL: 2
     Windows Store Apps: 3

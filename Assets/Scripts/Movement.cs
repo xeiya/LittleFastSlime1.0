@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     [Space(10)]
     //Creates an animation curve for the lens distortion
     [SerializeField] private AnimationCurve lensDistortionAnimationCurve;
-
+    //Gets the Intensity of the last time
     private float lensIntensityLastTime;
 
     private LensDistortion lensDistortion;
@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
             speedLines.Play();
 
-            //Takes the lens intensity from last time
+            //Takes the lens intensity from last time since startup
             lensIntensityLastTime = Time.realtimeSinceStartup;
         }
 

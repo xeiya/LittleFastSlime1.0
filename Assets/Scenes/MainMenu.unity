@@ -205,7 +205,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1072835209}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 3
+  m_MaxValue: 5
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -4109,9 +4109,10 @@ MonoBehaviour:
   mainMenu: {fileID: 740295542}
   volumeTextValue: {fileID: 618618142}
   volumeSlider: {fileID: 1159230450}
-  defaultVolume: 50
+  defaultVolume: 0.5
   volumeMixer: {fileID: 24100000, guid: e3f0a1e7eee76ba4982c8e8dbd8fedd9, type: 2}
   volume: {fileID: 906093260}
+  colorAdjustments: {fileID: 0}
   brightnessSlider: {fileID: 35698983}
   brightnessTextValue: {fileID: 1414196960}
   defaultBrightness: 1
@@ -4898,7 +4899,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 856aa277a5d505942ad1a3557399f9b8, type: 3}
-    m_FontSize: 56
+    m_FontSize: 68
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -8079,7 +8080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.504717, g: 0.73044103, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8088,10 +8089,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 856aa277a5d505942ad1a3557399f9b8, type: 3}
-    m_FontSize: 56
+    m_FontSize: 72
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 0
     m_MaxSize: 96
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -8578,18 +8579,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 850517627}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: VolumeApply
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1129776951}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine

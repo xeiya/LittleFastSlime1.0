@@ -25,8 +25,8 @@ public class MenuController : MonoBehaviour
     [Header("Gameplay Settings")]
 
     [Header("Graphics Settings")]
-    [SerializeField] private Volume volume;
-    private ColorAdjustments colorAdjustments;
+    public Volume volume;
+    public ColorAdjustments colorAdjustments;
 
     [Space(10)]
     [SerializeField] private Slider brightnessSlider = null;
@@ -54,9 +54,6 @@ public class MenuController : MonoBehaviour
         mainMenu.gameObject.SetActive(true);
 
         Time.timeScale = 1f;
-
-        //Gets the colorAdjustments profile from the global volume
-        volume.profile.TryGet(out colorAdjustments);
     }
 
     private void Start()
@@ -133,7 +130,8 @@ public class MenuController : MonoBehaviour
     public void GraphicsApply()
     {
         PlayerPrefs.SetFloat("masterBrightness", _brightnessLevel);
-        colorAdjustments.postExposure.value = _brightnessLevel;
+        if (volume.profile.TryGet(out ColorAdjustments colorAdjustments)) 
+        { colorAdjustments.postExposure.value = _brightnessLevel; }
 
         PlayerPrefs.SetInt("masterQuality", _qualityLevel);
         QualitySettings.SetQualityLevel(_qualityLevel);
